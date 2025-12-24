@@ -263,12 +263,18 @@ h1{
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height var(--t) var(--ease), margin var(--t) var(--ease), opacity var(--t) var(--ease);
+  transform: translateY(-4px);
+  transition: 
+    max-height 400ms var(--ease), 
+    margin 400ms var(--ease), 
+    opacity 300ms var(--ease),
+    transform 300ms var(--ease);
 }
 .lane.expanded .laneBody{
   margin-top: 10px;
-  max-height: 600px;
+  max-height: 500px; /* Adjusted to be closer to content height for better timing */
   opacity: 1;
+  transform: translateY(0);
 }
 .laneBody ul{
   margin: 10px 0 0;
