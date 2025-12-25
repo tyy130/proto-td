@@ -20,7 +20,7 @@
     <div class="pill">
       <div class="brand">
         <img src="assets/icon/blk-icon.png" alt="TacticDev logo" class="dot" width="28" height="28" aria-hidden="true">
-        TacticDev
+        <span class="brand-name"><b>tactic</b><span>dev</span></span>
       </div>
       <div class="jump" aria-label="Jump">
         <button data-go="c1">Intro</button>
@@ -197,7 +197,7 @@
           This form is a placeholder. Swap the action with Airtable, Formspree, Netlify, or your own endpoint.
         </p>
 
-        <form class="reveal" style="transition-delay:120ms;" action="#" method="post">
+        <form id="contact-form" class="reveal" style="transition-delay:120ms;" action="#" method="post">
           <div class="formGrid">
             <div>
               <label for="name">Name</label>
@@ -238,8 +238,20 @@
           </p>
         </form>
 
+        <div id="form-success" class="form-feedback" style="display:none;">
+          <h3 style="text-transform:uppercase; letter-spacing:0.05em;">Ticket Created</h3>
+          <p>Thanks! We've received your request and a ticket has been opened in our system. You'll receive a confirmation email shortly.</p>
+          <button class="cta" type="button" onclick="location.reload()">Send another</button>
+        </div>
+
+        <div id="form-error" class="form-feedback error" style="display:none;">
+          <h3 style="text-transform:uppercase; letter-spacing:0.05em;">Submission Failed</h3>
+          <p>Sorry, we couldn't create your ticket. Please try again or email us directly.</p>
+          <button class="cta" type="button" onclick="document.getElementById('form-error').style.display='none'; document.getElementById('contact-form').style.display='block';">Try again</button>
+        </div>
+
         <div class="end">
-          <div>© <span id="y"></span> TacticDev</div>
+          <div>© <span id="y"></span> <span class="brand-text"><b>tactic</b><span>dev</span></span></div>
           <div class="mono">Built for speed. Built for change.</div>
         </div>
       </div>

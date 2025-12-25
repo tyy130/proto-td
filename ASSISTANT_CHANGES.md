@@ -23,5 +23,8 @@ This file is appended by the assistant to record each change it makes while work
 - [2025-12-24T10:15:00Z] Fixed lane expansion visuals by moving styles to CSS and corrected IntersectionObserver root for snap container.
 
 - [2025-12-24T10:20:00Z] Smoothed lane expansion animation: increased duration to 400ms and added a subtle vertical slide effect.
+- [2025-12-24T10:30:00Z] Integrated osTicket: added form feedback containers to index.html, submission logic to main.js, and feedback styles to styles.css.
+- [2025-12-25T09:00:00Z] Updated brand title to "tacticdev" with weight contrast (bold "tactic", light "dev") and lowercase styling in header and footer.
+- [2025-12-25T09:10:00Z] Fixed brand spacing: wrapped text in a container to prevent flex gap from splitting "tactic" and "dev".
 
 ```

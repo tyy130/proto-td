@@ -59,3 +59,62 @@ lanes.forEach(el => {
     }
   });
 });
+
+// Form Submission (osTicket Integration)
+const contactForm = document.getElementById('contact-form');
+const successMsg = document.getElementById('form-success');
+const errorMsg = document.getElementById('form-error');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const formData = new FormData(contactForm);
+    const data = Object.fromEntries(formData.entries());
+    
+    // UI State: Loading
+    submitBtn.classList.add('loading');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    
+    try {
+      // Replace with your actual proxy endpoint
+      const PROXY_URL = '/.netlify/functions/osticket-proxy'; 
+      
+      // Construct osTicket payload
+      const payload = {
+        name: data.name,
+        email: data.email,
+        subject: `New Request: ${data.type}`,
+        message: `data:text/html,<b>Type:</b> ${data.type}<br><b>Tools:</b> ${data.tools || 'None'}<br><br><b>Details:</b><br>${data.details.replace(/\n/g, '<br>')}`,
+        alert: true,
+        autorespond: true,
+        source: 'API'
+      };
+
+      const response = await fetch(PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      // UI State: Success
+      contactForm.style.display = 'none';
+      successMsg.style.display = 'block';
+      successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    } catch (error) {
+      console.error('Submission error:', error);
+      // UI State: Error
+      contactForm.style.display = 'none';
+      errorMsg.style.display = 'block';
+      errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.textContent = originalBtnText;
+    }
+  });
+}
